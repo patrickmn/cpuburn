@@ -35,9 +35,13 @@ func main() {
 	for i := 0; i < numBurn; i++ {
 		go cpuBurn()
 	}
-	t := time.Tick(time.Duration(updateInterval) * time.Second)
-	for secs := updateInterval; ; secs += updateInterval {
-		<-t
-		fmt.Printf("%d seconds\n", secs)
+	if updateInterval > 0 {
+		t := time.Tick(time.Duration(updateInterval) * time.Second)
+		for secs := updateInterval; ; secs += updateInterval {
+			<-t
+			fmt.Printf("%d seconds\n", secs)
+		}
+	} else {
+		select {} // wait forever
 	}
 }
