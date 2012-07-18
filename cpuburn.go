@@ -14,6 +14,9 @@ var (
 
 func cpuBurn() {
 	for {
+		for i := 0; i < 2147483647; i++ {
+		}
+		runtime.Gosched()
 	}
 }
 
